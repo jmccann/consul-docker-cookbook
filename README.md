@@ -1,6 +1,6 @@
 # consul-docker
 
-TODO: Enter the cookbook description here.
+Cookbook to setup consul using docker.
 
 ## Supported Platforms
 
@@ -11,7 +11,7 @@ Tested And Validated On
 
 TODO: Include usage patterns of any providers or recipes.
 
-### consul-docker::default
+### Recipe: consul-docker::default
 
 Include `consul-docker` in your run_list.
 
@@ -22,6 +22,16 @@ Include `consul-docker` in your run_list.
   ]
 }
 ```
+
+## Attributes
+
+Attribute | Description | Type | Default
+----------|-------------|------|--------
+`node['consul']['config']` | Hash of configuration environment variables for Consul.  Primary way to configure how consul starts. See [consul docker image](https://hub.docker.com/_/consul/) and [consul configuration file docs](https://www.consul.io/docs/agent/options.html#configuration-files) for more information.  See [`.kitchen.yml`](.kitchen.yml) for examples of using this to drive behavior. | Hash | `nil`
+`node['consul']['port']` | Port(s) to expose from docker container. See []() for more info. | Array | `['8300', '8301', '8302', '8400', '8500', '8600']`
+`node['consul']['repo']` | The docker repo for the image to use | String | `'consul'`
+`node['consul']['tag']` | The docker tag for the image to use | String | `'0.8.3'`
+`node['consul']['sensitive']` | Whether to consider container resource sensitive or not | Boolean | `false`
 
 ## Testing
 
