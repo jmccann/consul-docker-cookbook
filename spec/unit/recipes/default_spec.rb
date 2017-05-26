@@ -39,7 +39,7 @@ describe 'consul-docker::default' do
     it 'starts consul container' do
       expect(chef_run).to run_docker_container('consul')
         .with(command: 'agent', env: [], repo: 'consul', tag: '0.8.3',
-              port: ['8300', '8301', '8302', '8400', '8500', '8600'],
+              port: ['8300', '8301', '8302', '8500', '8600'],
               sensitive: false)
     end
   end

@@ -5,14 +5,38 @@
 # The Inspec reference, with examples and extensive documentation, can be
 # found at http://inspec.io/docs/reference/resources/
 
-unless os.windows?
-  # This is an example test, replace with your own test.
-  describe user('root'), :skip do
-    it { should exist }
-  end
+puts "Sleeping for 5 seconds while consul cluster forms"
+sleep 5
+
+# Make sure all ports are up
+describe port(8300) do
+  it { should be_listening }
+end
+describe port(8301) do
+  it { should be_listening }
+end
+describe port(8302) do
+  it { should be_listening }
+end
+describe port(8500) do
+  it { should be_listening }
+end
+describe port(8600) do
+  it { should be_listening }
 end
 
-# This is an example test, replace it with your own test.
-describe port(80), :skip do
-  it { should_not be_listening }
+# Make sure cluster joined OK
+describe command('docker logs consul') do
+  its('stdout') { should include('(LAN) joined: 1 Err: <nil>') }
+end
+
+# Make sure can register service
+describe command('curl -f --request PUT --data @/root/payload.json http://localhost:8500/v1/catalog/register') do
+  its('exit_status') { should eq 0 }
+end
+
+# Make sure can DNS service
+describe command('dig @127.0.0.1 -p 8600 redis.service.consul') do
+  its('stdout') { should include('ANSWER SECTION') }
+  its('stdout') { should include('192.168.30.10') }
 end

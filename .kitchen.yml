@@ -24,6 +24,7 @@ suites:
       - recipe[chef-apt-docker::default]
       - recipe[jmccann-docker-host::default]
       - recipe[consul-docker::default]
+      - recipe[test::default]
     verifier:
       inspec_tests:
         - test/smoke/default
@@ -51,6 +52,7 @@ suites:
       - recipe[chef-apt-docker::default]
       - recipe[jmccann-docker-host::default]
       - recipe[consul-docker::default]
+      - recipe[test::default]
     verifier:
       inspec_tests:
         - test/smoke/default
