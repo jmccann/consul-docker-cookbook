@@ -32,8 +32,13 @@ suites:
       consul:
         config:
           consul_local_config:
+            acl_datacenter: dc1
+            acl_default_policy: allow
+            acl_master_token: 8fa14cdd754f91cc6554c9e71929cce7
             bootstrap_expect: 2
+            datacenter: dc1
             disable_update_check: true
+            # encrypt: cg8StVXbQJ0gPvMd9o7yrg==
             retry_join:
               - 192.168.33.12
             server: true
@@ -60,8 +65,13 @@ suites:
       consul:
         config:
           consul_local_config:
+            acl_datacenter: dc1
+            acl_default_policy: allow
+            acl_master_token: 8fa14cdd754f91cc6554c9e71929cce7
             bootstrap_expect: 2
+            datacenter: dc1
             disable_update_check: true
+            # encrypt: cg8StVXbQJ0gPvMd9o7yrg==
             retry_join:
               - 192.168.33.11
             server: true

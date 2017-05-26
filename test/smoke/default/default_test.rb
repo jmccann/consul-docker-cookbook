@@ -5,8 +5,8 @@
 # The Inspec reference, with examples and extensive documentation, can be
 # found at http://inspec.io/docs/reference/resources/
 
-puts "Sleeping for 5 seconds while consul cluster forms"
-sleep 5
+puts "Sleeping for 15 seconds while consul cluster forms"
+sleep 15
 
 # Make sure all ports are up
 describe port(8300) do
@@ -31,6 +31,9 @@ describe command('docker logs consul') do
 end
 
 # Make sure can register service
+# describe command('curl -f --request PUT --header "X-Consul-Token: 8fa14cdd754f91cc6554c9e71929cce7" --data @/root/payload.json http://localhost:8500/v1/catalog/register') do
+#   its('exit_status') { should eq 0 }
+# end
 describe command('curl -f --request PUT --data @/root/payload.json http://localhost:8500/v1/catalog/register') do
   its('exit_status') { should eq 0 }
 end
