@@ -27,7 +27,7 @@ Include `consul-docker` in your run_list.
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
-`node['consul']['config']` | Hash of configuration environment variables for Consul.  Primary way to configure how consul starts. See [consul docker image](https://hub.docker.com/_/consul/) and [consul configuration file docs](https://www.consul.io/docs/agent/options.html#configuration-files) for more information.  See [`.kitchen.yml`](.kitchen.yml) for examples of using this to drive behavior. | Hash | `nil`
+`node['consul']['config']` | Hash of configuration environment variables for Consul.  Primary way to configure how consul starts. See [consul docker image](https://hub.docker.com/_/consul/) and [consul configuration file docs](https://www.consul.io/docs/agent/options.html#configuration-files) for more information.  See [`.kitchen.yml`](.kitchen.yml#L32-L40) for examples of using this to drive behavior. | Hash | `nil`
 `node['consul']['port']` | Port(s) to expose from docker container. See []() for more info. | Array | `['8300', '8301', '8302', '8400', '8500', '8600']`
 `node['consul']['repo']` | The docker repo for the image to use | String | `'consul'`
 `node['consul']['tag']` | The docker tag for the image to use | String | `'0.8.3'`
