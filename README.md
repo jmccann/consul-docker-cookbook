@@ -9,8 +9,6 @@ Tested And Validated On
 
 ## Usage
 
-TODO: Include usage patterns of any providers or recipes.
-
 ### Recipe: consul-docker::default
 
 Include `consul-docker` in your run_list.
