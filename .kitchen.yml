@@ -38,7 +38,7 @@ suites:
             bootstrap_expect: 2
             datacenter: dc1
             disable_update_check: true
-            # encrypt: cg8StVXbQJ0gPvMd9o7yrg==
+            encrypt: cg8StVXbQJ0gPvMd9o7yrg==
             retry_join:
               - 192.168.33.12
             server: true
@@ -71,7 +71,7 @@ suites:
             bootstrap_expect: 2
             datacenter: dc1
             disable_update_check: true
-            # encrypt: cg8StVXbQJ0gPvMd9o7yrg==
+            encrypt: cg8StVXbQJ0gPvMd9o7yrg==
             retry_join:
               - 192.168.33.11
             server: true
