@@ -9,3 +9,5 @@ chef_version '>= 12.1' if respond_to?(:chef_version)
 
 source_url 'https://github.com/jmccann/consul-docker-cookbook'
 issues_url 'https://github.com/jmccann/consul-docker-cookbook/issues'
+
+depends 'jmccann-docker-host', '~> 1.0'

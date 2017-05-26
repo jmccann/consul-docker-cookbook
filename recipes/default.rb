@@ -16,3 +16,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+docker_image 'consul' do
+  repo node['consul']['repo']
+  tag node['consul']['tag']
+end
+
+docker_container 'consul' do
+  command 'agent'
+  env docker_env(node['consul']['config']) if node['consul']['config']
+  port node['consul']['port']
+  repo node['consul']['repo']
+  restart_policy 'always'
+  tag node['consul']['tag']
+  network_mode 'host'
+  sensitive node['consul']['sensitive']
+  volumes node['consul']['volumes'] if node['consul']['volumes']
+end

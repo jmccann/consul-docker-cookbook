@@ -21,7 +21,7 @@ require 'spec_helper'
 
 describe 'consul-docker::default' do
   context 'When all attributes are default, on an Ubuntu 16.04' do
-    let(:chef_run) do
+    cached(:chef_run) do
       # for a complete list of available platforms and versions see:
       # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04')
@@ -30,6 +30,63 @@ describe 'consul-docker::default' do
 
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
+    end
+
+    it 'pulls consul image' do
+      expect(chef_run).to pull_docker_image('consul').with(repo: 'consul', tag: '0.8.3')
+    end
+
+    it 'starts consul container' do
+      expect(chef_run).to run_docker_container('consul')
+        .with(command: 'agent', env: [], repo: 'consul', tag: '0.8.3',
+              port: ['8300', '8301', '8302', '8400', '8500', '8600'],
+              sensitive: false)
+    end
+  end
+
+  context 'When attributes are overridden, on an Ubuntu 16.04' do
+    cached(:chef_run) do
+      # for a complete list of available platforms and versions see:
+      # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
+      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
+        node.normal['consul']['config']['consul_local_config']['bootstrap-expect'] = 2
+        node.normal['consul']['config']['consul_local_config']['server'] = true
+        node.normal['consul']['config']['consul_local_config']['retry-join'] = ['192.168.1.3', '192.168.1.2']
+        node.normal['consul']['config']['consul_http_addr'] = '0.0.0.0'
+        node.normal['consul']['repo'] = 'jmccann/consul'
+        node.normal['consul']['port'] = ['1', '2']
+        node.normal['consul']['sensitive'] = true
+        node.normal['consul']['tag'] = 'rc'
+      end
+      runner.converge(described_recipe)
+    end
+
+    it 'converges successfully' do
+      expect { chef_run }.to_not raise_error
+    end
+
+    it 'pulls consul image' do
+      expect(chef_run).to pull_docker_image('consul').with(repo: 'jmccann/consul', tag: 'rc')
+    end
+
+    it 'starts consul container' do
+      expect(chef_run).to run_docker_container('consul')
+        .with(command: 'agent', repo: 'jmccann/consul', tag: 'rc',
+              port: ['1', '2'], sensitive: true)
+    end
+
+    describe 'consul container environment' do
+      let(:consul_env) do
+        chef_run.docker_container('consul').env
+      end
+
+      it 'creates consul json config' do
+        expect(consul_env).to include('CONSUL_LOCAL_CONFIG={"bootstrap-expect":2,"server":true,"retry-join":["192.168.1.3","192.168.1.2"]}')
+      end
+
+      it 'sets http addr to listen on' do
+        expect(consul_env).to include('CONSUL_HTTP_ADDR=0.0.0.0')
+      end
     end
   end
 end
