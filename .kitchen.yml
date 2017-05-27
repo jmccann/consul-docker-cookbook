@@ -22,6 +22,7 @@ suites:
         - ["private_network", {ip: "192.168.33.11"}]
     run_list:
       - recipe[chef-apt-docker::default]
+      - recipe[test::certs]
       - recipe[jmccann-docker-host::default]
       - recipe[consul-docker::default]
       - recipe[test::default]
@@ -36,14 +37,23 @@ suites:
             acl_default_policy: allow
             acl_master_token: 8fa14cdd754f91cc6554c9e71929cce7
             bootstrap_expect: 2
+            ca_file: /consul/ssl/ca.crt
+            cert_file: /consul/ssl/consul.crt
             datacenter: dc1
             disable_update_check: true
-            encrypt: cg8StVXbQJ0gPvMd9o7yrg==
+            key_file: /consul/ssl/consul.key
+            ports:
+              https: 9000
             retry_join:
               - 192.168.33.12
             server: true
+            verify_incoming_rpc: true
+            verify_outgoing: true
           consul_bind_interface: enp0s8
           consul_http_addr: 0.0.0.0
+        volumes:
+          - /root/ssl:/consul/ssl
+          - /root/entrypoint.sh:/root/entrypoint.sh
       jmccann-docker-host:
         docker:
           service:
@@ -55,6 +65,7 @@ suites:
         - ["private_network", {ip: "192.168.33.12"}]
     run_list:
       - recipe[chef-apt-docker::default]
+      - recipe[test::certs]
       - recipe[jmccann-docker-host::default]
       - recipe[consul-docker::default]
       - recipe[test::default]
@@ -69,14 +80,24 @@ suites:
             acl_default_policy: allow
             acl_master_token: 8fa14cdd754f91cc6554c9e71929cce7
             bootstrap_expect: 2
+            ca_file: /consul/ssl/ca.crt
+            cert_file: /consul/ssl/consul.crt
             datacenter: dc1
             disable_update_check: true
-            encrypt: cg8StVXbQJ0gPvMd9o7yrg==
+            key_file: /consul/ssl/consul.key
+            ports:
+              https: 9000
             retry_join:
               - 192.168.33.11
             server: true
+            verify_incoming_rpc: true
+            verify_outgoing: true
           consul_bind_interface: enp0s8
           consul_http_addr: 0.0.0.0
+          entrypoint: /root/entrypoint.sh
+        volumes:
+          - /root/ssl:/consul/ssl
+          - /root/entrypoint.sh:/root/entrypoint.sh
       jmccann-docker-host:
         docker:
           service:

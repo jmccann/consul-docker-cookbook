@@ -16,6 +16,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+cookbook_file '/root/entrypoint.sh'
+
 docker_image 'consul' do
   repo node['consul']['repo']
   tag node['consul']['tag']
@@ -23,6 +25,7 @@ end
 
 docker_container 'consul' do
   command 'agent'
+  entrypoint node['consul']['entrypoint'] if node['consul']['entrypoint']
   env docker_env(node['consul']['config']) if node['consul']['config']
   port node['consul']['port']
   repo node['consul']['repo']
