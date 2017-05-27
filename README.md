@@ -33,9 +33,19 @@ Attribute | Description | Type | Default
 `node['consul']['sensitive']` | Whether to consider container resource sensitive or not | Boolean | `false`
 `node['consul']['volumes']` | Volumes to have added to your container | Array | `nil`
 
+### ACL Configuration
+
+The [`.kitchen.yml`](.kitchen.yml) has an example of setting up ACLs.  More info
+can be found at the [ACL System Docs](https://www.consul.io/docs/guides/acl.html).
+
+Currently this can't be totally automated to work with default `deny` policy.
+This is documented at https://github.com/hashicorp/consul/issues/3054 and
+manual steps required at https://gist.github.com/slackpad/d89ce0e1cc0802c3c4f2d84932fa3234.
+
 ### TLS Configuration
 
 The [`.kitchen.yml`](.kitchen.yml) has an example of setting up TLS for encyption.
+More info cab be found at the [Encryption Docs](https://www.consul.io/docs/agent/encryption.html).
 
 ## Testing
 
