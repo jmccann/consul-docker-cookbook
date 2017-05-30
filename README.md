@@ -27,7 +27,7 @@ Attribute | Description | Type | Default
 ----------|-------------|------|--------
 `node['consul-docker']['config']` | Hash of configuration environment variables for Consul.  Primary way to configure how consul starts. See [consul docker image](https://hub.docker.com/_/consul/) and [consul configuration file docs](https://www.consul.io/docs/agent/options.html#configuration-files) for more information.  See [`.kitchen.yml`](.kitchen.yml) for examples of using this to drive behavior. | Hash | `nil`
 `node['consul-docker']['entrypoint']` | Start the consul container with your own entrypoint.  Must be added as volume to container. | String | `nil`
-`node['consul-docker']['port']` | Port(s) to expose from docker container. See []() for more info. | Array | `['8300', '8301', '8302', '8400', '8500', '8600']`
+`node['consul-docker']['port']` | Port(s) to expose from docker container. See [docker cookbook](https://github.com/chef-cookbooks/docker#properties-7) for more info. | Array | `['8300', '8301', '8302', '8400', '8500', '8600']`
 `node['consul-docker']['repo']` | The docker repo for the image to use | String | `'consul'`
 `node['consul-docker']['tag']` | The docker tag for the image to use | String | `'0.8.3'`
 `node['consul-docker']['sensitive']` | Whether to consider container resource sensitive or not | Boolean | `false`

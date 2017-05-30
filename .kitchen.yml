@@ -54,10 +54,6 @@ suites:
         volumes:
           - /root/ssl:/consul/ssl
           - /root/entrypoint.sh:/root/entrypoint.sh
-      jmccann-docker-host:
-        docker:
-          service:
-            storage_driver: overlay2
 
   - name: node2
     driver:
@@ -98,7 +94,3 @@ suites:
         volumes:
           - /root/ssl:/consul/ssl
           - /root/entrypoint.sh:/root/entrypoint.sh
-      jmccann-docker-host:
-        docker:
-          service:
-            storage_driver: overlay2
