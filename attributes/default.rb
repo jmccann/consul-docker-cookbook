@@ -1,4 +1,4 @@
-default['consul']['port'] = ['8300', '8301', '8302', '8500', '8600']
-default['consul']['repo'] = 'consul'
-default['consul']['tag'] = '0.8.3'
-default['consul']['sensitive'] = false
+default['consul-docker']['port'] = ['8300', '8301', '8302', '8500', '8600']
+default['consul-docker']['repo'] = 'consul'
+default['consul-docker']['tag'] = '0.8.3'
+default['consul-docker']['sensitive'] = false

@@ -30,7 +30,7 @@ suites:
       inspec_tests:
         - test/smoke/default
     attributes:
-      consul:
+      consul-docker:
         config:
           consul_local_config:
             acl_datacenter: dc1
@@ -57,7 +57,7 @@ suites:
       jmccann-docker-host:
         docker:
           service:
-            storage_driver: overlayfs
+            storage_driver: overlay2
 
   - name: node2
     driver:
@@ -73,7 +73,7 @@ suites:
       inspec_tests:
         - test/smoke/default
     attributes:
-      consul:
+      consul-docker:
         config:
           consul_local_config:
             acl_datacenter: dc1
@@ -101,4 +101,4 @@ suites:
       jmccann-docker-host:
         docker:
           service:
-            storage_driver: overlayfs
+            storage_driver: overlay2

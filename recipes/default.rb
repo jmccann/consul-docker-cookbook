@@ -19,19 +19,19 @@
 cookbook_file '/root/entrypoint.sh'
 
 docker_image 'consul' do
-  repo node['consul']['repo']
-  tag node['consul']['tag']
+  repo node['consul-docker']['repo']
+  tag node['consul-docker']['tag']
 end
 
 docker_container 'consul' do
   command 'agent'
-  entrypoint node['consul']['entrypoint'] if node['consul']['entrypoint']
-  env docker_env(node['consul']['config']) if node['consul']['config']
-  port node['consul']['port']
-  repo node['consul']['repo']
+  entrypoint node['consul-docker']['entrypoint'] if node['consul-docker']['entrypoint']
+  env docker_env(node['consul-docker']['config']) if node['consul-docker']['config']
+  port node['consul-docker']['port']
+  repo node['consul-docker']['repo']
   restart_policy 'always'
-  tag node['consul']['tag']
+  tag node['consul-docker']['tag']
   network_mode 'host'
-  sensitive node['consul']['sensitive']
-  volumes node['consul']['volumes'] if node['consul']['volumes']
+  sensitive node['consul-docker']['sensitive']
+  volumes node['consul-docker']['volumes'] if node['consul-docker']['volumes']
 end

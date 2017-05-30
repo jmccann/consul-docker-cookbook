@@ -49,14 +49,14 @@ describe 'consul-docker::default' do
       # for a complete list of available platforms and versions see:
       # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
       runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
-        node.normal['consul']['config']['consul_local_config']['bootstrap-expect'] = 2
-        node.normal['consul']['config']['consul_local_config']['server'] = true
-        node.normal['consul']['config']['consul_local_config']['retry-join'] = ['192.168.1.3', '192.168.1.2']
-        node.normal['consul']['config']['consul_http_addr'] = '0.0.0.0'
-        node.normal['consul']['repo'] = 'jmccann/consul'
-        node.normal['consul']['port'] = ['1', '2']
-        node.normal['consul']['sensitive'] = true
-        node.normal['consul']['tag'] = 'rc'
+        node.normal['consul-docker']['config']['consul_local_config']['bootstrap-expect'] = 2
+        node.normal['consul-docker']['config']['consul_local_config']['server'] = true
+        node.normal['consul-docker']['config']['consul_local_config']['retry-join'] = ['192.168.1.3', '192.168.1.2']
+        node.normal['consul-docker']['config']['consul_http_addr'] = '0.0.0.0'
+        node.normal['consul-docker']['repo'] = 'jmccann/consul'
+        node.normal['consul-docker']['port'] = ['1', '2']
+        node.normal['consul-docker']['sensitive'] = true
+        node.normal['consul-docker']['tag'] = 'rc'
       end
       runner.converge(described_recipe)
     end
