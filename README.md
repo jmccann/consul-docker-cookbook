@@ -31,6 +31,8 @@ Attribute | Description | Type | Default
 `node['consul-docker']['repo']` | The docker repo for the image to use | String | `'consul'`
 `node['consul-docker']['tag']` | The docker tag for the image to use | String | `'0.8.3'`
 `node['consul-docker']['sensitive']` | Whether to consider container resource sensitive or not | Boolean | `false`
+`node['consul-docker']['vault']['bag']` | Vault bag to use for secrets | String | `nil`
+`node['consul-docker']['vault']['items']` | Vault items to load into config | Array | `nil`
 `node['consul-docker']['volumes']` | Volumes to have added to your container | Array | `nil`
 
 ### ACL Configuration

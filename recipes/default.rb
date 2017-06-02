@@ -26,7 +26,7 @@ end
 docker_container 'consul' do
   command 'agent'
   entrypoint node['consul-docker']['entrypoint'] if node['consul-docker']['entrypoint']
-  env docker_env(node['consul-docker']['config']) if node['consul-docker']['config']
+  env docker_env(node['consul-docker']['config'], node['consul-docker']['vault']['items'], node['consul-docker']['vault']['bag']) if node['consul-docker']['config']
   port node['consul-docker']['port']
   repo node['consul-docker']['repo']
   restart_policy 'always'

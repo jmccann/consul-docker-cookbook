@@ -35,7 +35,6 @@ suites:
           consul_local_config:
             acl_datacenter: dc1
             acl_default_policy: allow
-            acl_master_token: 8fa14cdd754f91cc6554c9e71929cce7
             bootstrap_expect: 2
             ca_file: /consul/ssl/ca.crt
             cert_file: /consul/ssl/consul.crt
@@ -51,6 +50,9 @@ suites:
             verify_outgoing: true
           consul_bind_interface: enp0s8
           consul_http_addr: 0.0.0.0
+        vault:
+          bag: vault_consul
+          items: ['acl_master_token']
         volumes:
           - /root/ssl:/consul/ssl
           - /root/entrypoint.sh:/root/entrypoint.sh
@@ -74,7 +76,6 @@ suites:
           consul_local_config:
             acl_datacenter: dc1
             acl_default_policy: allow
-            acl_master_token: 8fa14cdd754f91cc6554c9e71929cce7
             bootstrap_expect: 2
             ca_file: /consul/ssl/ca.crt
             cert_file: /consul/ssl/consul.crt
@@ -91,6 +92,9 @@ suites:
           consul_bind_interface: enp0s8
           consul_http_addr: 0.0.0.0
           entrypoint: /root/entrypoint.sh
+        vault:
+          bag: vault_consul
+          items: ['acl_master_token']
         volumes:
           - /root/ssl:/consul/ssl
           - /root/entrypoint.sh:/root/entrypoint.sh

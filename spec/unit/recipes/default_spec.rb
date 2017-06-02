@@ -48,7 +48,7 @@ describe 'consul-docker::default' do
     cached(:chef_run) do
       # for a complete list of available platforms and versions see:
       # https://github.com/customink/fauxhai/blob/master/PLATFORMS.md
-      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, _server|
+      runner = ChefSpec::ServerRunner.new(platform: 'ubuntu', version: '16.04') do |node, server|
         node.normal['consul-docker']['config']['consul_local_config']['bootstrap-expect'] = 2
         node.normal['consul-docker']['config']['consul_local_config']['server'] = true
         node.normal['consul-docker']['config']['consul_local_config']['retry-join'] = ['192.168.1.3', '192.168.1.2']
@@ -56,7 +56,11 @@ describe 'consul-docker::default' do
         node.normal['consul-docker']['repo'] = 'jmccann/consul'
         node.normal['consul-docker']['port'] = ['1', '2']
         node.normal['consul-docker']['sensitive'] = true
+        node.normal['consul-docker']['vault']['bag'] = 'vault_consul'
+        node.normal['consul-docker']['vault']['items'] = ['acl_master_token']
         node.normal['consul-docker']['tag'] = 'rc'
+
+        inject_databags server
       end
       runner.converge(described_recipe)
     end
