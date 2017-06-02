@@ -85,7 +85,7 @@ describe 'consul-docker::default' do
       end
 
       it 'creates consul json config' do
-        expect(consul_env).to include('CONSUL_LOCAL_CONFIG={"bootstrap-expect":2,"server":true,"retry-join":["192.168.1.3","192.168.1.2"]}')
+        expect(consul_env).to include('CONSUL_LOCAL_CONFIG={"bootstrap-expect":2,"server":true,"retry-join":["192.168.1.3","192.168.1.2"],"acl_master_token":"8fa14cdd754f91cc6554c9e71929cce7"}')
       end
 
       it 'sets http addr to listen on' do

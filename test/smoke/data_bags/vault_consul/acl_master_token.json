@@ -1,3 +1,5 @@
 {
-  "acl_master_token": "8fa14cdd754f91cc6554c9e71929cce7"
+  "consul_local_config": {
+    "acl_master_token": "8fa14cdd754f91cc6554c9e71929cce7"
+  }
 }
