@@ -1,3 +1,6 @@
+# 0.3.2
+* Have entrypoint file be executable
+
 # 0.3.1
 * Fix loading/merging of secrets into `CONSUL_LOCAL_CONFIG`
 
